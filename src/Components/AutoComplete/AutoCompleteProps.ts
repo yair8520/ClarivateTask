@@ -1,7 +1,7 @@
 // AutoCompleteProps.ts
 
-import {TextInputProps} from 'react-native';
-import {TPlace} from '../../Types/Places';
+import { TextInputProps } from 'react-native';
+import { TPlace } from '../../Types/Places';
 
 export interface AutoCompleteProps {
   data: TPlace[];

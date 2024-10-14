@@ -1,8 +1,8 @@
-import {View, Text, Animated, TouchableOpacity} from 'react-native';
-import React, {useRef, useState} from 'react';
-import {HomePageProps} from './HomePageProps';
+import { View, Text, Animated, TouchableOpacity } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { HomePageProps } from './HomePageProps';
 import styles from './HomePageStyles';
-import {CMap, LocationSearch} from '../../Components';
+import { CMap, LocationSearch } from '../../Components';
 
 export const HomePage = ({}: HomePageProps) => {
   const [expanded, setExpanded] = useState(false);
@@ -23,7 +23,7 @@ export const HomePage = ({}: HomePageProps) => {
       <View style={styles.body}>
         <CMap />
       </View>
-      <Animated.View style={[styles.header, {height: animation}]}>
+      <Animated.View style={[styles.header, { height: animation }]}>
         <TouchableOpacity onPress={toggleHeader}>
           <Text style={styles.expendText}>
             {!expanded ? 'Collapse search' : 'Expand search'}

@@ -1,8 +1,14 @@
-import React, {useState} from 'react';
-import {View, TextInput, FlatList, Text, TouchableOpacity} from 'react-native';
-import {AutoCompleteProps} from './AutoCompleteProps';
+import React, { useState } from 'react';
+import {
+  View,
+  TextInput,
+  FlatList,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
+import { AutoCompleteProps } from './AutoCompleteProps';
 import styles from './AutoCompleteStyles';
-import type {TPlace} from '../../Types/Places';
+import type { TPlace } from '../../Types/Places';
 
 export const AutoComplete = ({
   data,
@@ -12,15 +18,14 @@ export const AutoComplete = ({
   inputProps,
 }: AutoCompleteProps) => {
   const [filteredData, setFilteredData] = useState<TPlace[]>([]);
-  console.log(filteredData);
   const filterData = (text: string) => {
-    onChange({description: text, place_id: ''});
+    onChange({ description: text, place_id: '' });
     if (!text) {
       setFilteredData(data);
       return;
     }
-    const filtered = data.filter(item =>
-      item.description.toLowerCase().includes(text.toLowerCase()),
+    const filtered = data.filter((item) =>
+      item.description.toLowerCase().includes(text.toLowerCase())
     );
     setFilteredData(filtered.length > 0 ? filtered : data);
   };
@@ -43,11 +48,12 @@ export const AutoComplete = ({
         <View style={styles.dropdown}>
           <FlatList
             data={filteredData}
-            keyExtractor={item => item.place_id}
-            renderItem={({item}) => (
+            keyExtractor={(item) => item.place_id}
+            renderItem={({ item }) => (
               <TouchableOpacity
                 style={styles.item}
-                onPress={() => handleItemSelect(item)}>
+                onPress={() => handleItemSelect(item)}
+              >
                 <Text style={styles.itemText}>{item.description}</Text>
               </TouchableOpacity>
             )}

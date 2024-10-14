@@ -1,6 +1,6 @@
-import {DO_NOT_USE_OR_YOU_WILL_BE_FIRED_CALLBACK_REF_RETURN_VALUES} from 'react';
-import {TPlace} from '../../Types/Places';
-import {LatLng} from 'react-native-maps';
+import { DO_NOT_USE_OR_YOU_WILL_BE_FIRED_CALLBACK_REF_RETURN_VALUES } from 'react';
+import { TPlace } from '../../Types/Places';
+import { LatLng } from 'react-native-maps';
 
 export interface HomeContextProps {
   [key: string]: any;

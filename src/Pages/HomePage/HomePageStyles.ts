@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -13,7 +13,7 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     top: 0,
     zIndex: 150,
-    overflow: 'hidden', 
+    overflow: 'hidden',
   },
   body: {
     flex: 1,

@@ -1,12 +1,12 @@
-import React, {useContext, useEffect, useRef} from 'react';
-import {CMapProps} from './CMapProps';
+import React, { useContext, useEffect, useRef } from 'react';
+import { CMapProps } from './CMapProps';
 import styles from './CMapStyles';
-import MapView, {Marker} from 'react-native-maps';
-import {HomeContext} from '../../Context';
-import {initialRegion, zoom} from '../../Constant';
+import MapView, { Marker } from 'react-native-maps';
+import { HomeContext } from '../../Context';
+import { initialRegion, zoom } from '../../Constant';
 
-export const CMap = ({...rest}: CMapProps) => {
-  const {coordinates} = useContext(HomeContext);
+export const CMap = ({ ...rest }: CMapProps) => {
+  const { coordinates } = useContext(HomeContext);
   const mapRef = useRef<MapView | null>(null);
   useEffect(() => {
     if (mapRef.current && coordinates) {
@@ -15,7 +15,7 @@ export const CMap = ({...rest}: CMapProps) => {
           ...coordinates,
           ...zoom,
         },
-        1000,
+        1000
       );
     }
   }, [coordinates]);
@@ -25,7 +25,8 @@ export const CMap = ({...rest}: CMapProps) => {
       style={styles.container}
       provider="google"
       initialRegion={initialRegion}
-      {...rest}>
+      {...rest}
+    >
       {coordinates ? <Marker coordinate={coordinates}></Marker> : null}
     </MapView>
   );

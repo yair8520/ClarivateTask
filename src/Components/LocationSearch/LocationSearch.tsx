@@ -1,9 +1,9 @@
-import React, {useContext} from 'react';
-import {LocationSearchProps} from './LocationSearchProps';
-import {AutoComplete} from '../AutoComplete';
-import {HomeContext} from '../../Context';
-import {Button} from 'react-native';
-import {getPlaceCoordinates} from '../../Api/Places';
+import React, { useContext } from 'react';
+import { LocationSearchProps } from './LocationSearchProps';
+import { AutoComplete } from '../AutoComplete';
+import { HomeContext } from '../../Context';
+import { Button } from 'react-native';
+import { getPlaceCoordinates } from '../../Api/Places';
 
 export const LocationSearch = ({}: LocationSearchProps) => {
   const {
@@ -16,9 +16,8 @@ export const LocationSearch = ({}: LocationSearchProps) => {
     setCoordinates,
   } = useContext(HomeContext);
   const setSelectedPlace = () => {
-    console.log(city, country,!!(city.place_id && country.place_id));
-    getPlaceCoordinates(city.place_id).then(coordinates =>
-      setCoordinates(coordinates),
+    getPlaceCoordinates(city.place_id).then((coordinates) =>
+      setCoordinates(coordinates)
     );
   };
   const buttonStatus = !!(city.place_id && country.place_id);
@@ -35,7 +34,7 @@ export const LocationSearch = ({}: LocationSearchProps) => {
         placeholder="Search for a city"
         onChange={setCity}
         value={city.description}
-        inputProps={{editable: !!country.place_id}}
+        inputProps={{ editable: !!country.place_id }}
       />
       <Button disabled={!buttonStatus} title="Go!" onPress={setSelectedPlace} />
     </>

@@ -4,4 +4,4 @@ export const initialRegion = {
   latitudeDelta: 0.0922,
   longitudeDelta: 0.0421,
 };
-export const zoom = {latitudeDelta: 0.09, longitudeDelta: 0.09};
+export const zoom = { latitudeDelta: 0.09, longitudeDelta: 0.09 };

@@ -1,16 +1,15 @@
-import {LatLng} from 'react-native-maps';
-import type {TPlace, TLocation} from '../Types/Places';
-const GOOGLE_PLACES_API = 'AIzaSyBVhxfeN4IYEo1J2TkpLNtPsT72_gI4fuE';
+import { LatLng } from 'react-native-maps';
+import type { TPlace, TLocation } from '../Types/Places';
+import { GOOGLE_PLACES_API } from '@env';
 
 export const getCountriesFromGoogle = async (
-  input: string,
+  input: string
 ): Promise<TPlace[]> => {
   try {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=(regions)&key=${GOOGLE_PLACES_API}`,
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=(regions)&key=${GOOGLE_PLACES_API}`
     );
     const data = await response.json();
-    console.log(data);
     return data.predictions.map((prediction: TPlace) => ({
       description: prediction.description,
       place_id: prediction.place_id,
@@ -26,18 +25,17 @@ export const getCountriesFromGoogle = async (
 };
 export const getCitiesForCountry = async (
   countryCode: string,
-  input: string,
+  input: string
 ): Promise<TPlace[]> => {
   try {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=(cities)&components=country:${countryCode}&key=${GOOGLE_PLACES_API}`,
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=(cities)&components=country:${countryCode}&key=${GOOGLE_PLACES_API}`
     );
 
     const data = await response.json();
 
     // Check if predictions are empty
     if (data.predictions.length === 0) {
-      console.log("empty")
       return [
         {
           description: 'No result Found',
@@ -46,10 +44,10 @@ export const getCitiesForCountry = async (
       ];
     }
     return data.predictions.map(
-      (prediction: {description: string; place_id: string}) => ({
+      (prediction: { description: string; place_id: string }) => ({
         description: prediction.description,
         place_id: prediction.place_id,
-      }),
+      })
     );
   } catch (error) {
     console.error('Error fetching cities from Google Places API:', error);
@@ -62,17 +60,16 @@ export const getCitiesForCountry = async (
   }
 };
 export const getCountryCodeFromPlaceId = async (
-  placeId: string,
+  placeId: string
 ): Promise<string | null> => {
   try {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${GOOGLE_PLACES_API}`,
+      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${GOOGLE_PLACES_API}`
     );
     const data = await response.json();
-    console.log(data);
 
     const countryComponent = data.result.address_components.find(
-      (component: any) => component.types.includes('country'),
+      (component: any) => component.types.includes('country')
     );
     return countryComponent ? countryComponent.short_name : null;
   } catch (error) {
@@ -82,11 +79,11 @@ export const getCountryCodeFromPlaceId = async (
 };
 
 export const getPlaceCoordinates = async (
-  placeId: string,
+  placeId: string
 ): Promise<LatLng | null> => {
   try {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${GOOGLE_PLACES_API}`,
+      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${GOOGLE_PLACES_API}`
     );
     const data = await response.json();
     if (data.status === 'OK') {
@@ -101,7 +98,7 @@ export const getPlaceCoordinates = async (
   } catch (error) {
     console.error(
       'Error fetching place details from Google Places API:',
-      error,
+      error
     );
     return null;
   }

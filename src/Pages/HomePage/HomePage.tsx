@@ -25,9 +25,7 @@ export const HomePage = ({}: HomePageProps) => {
       </View>
       <Animated.View style={[styles.header, { height: animation }]}>
         <TouchableOpacity onPress={toggleHeader}>
-          <Text style={styles.expendText}>
-            {!expanded ? 'Collapse search' : 'Expand search'}
-          </Text>
+          <Text style={styles.expendText}>{!expanded ? '▲' : '▼'}search</Text>
         </TouchableOpacity>
         <LocationSearch />
       </Animated.View>

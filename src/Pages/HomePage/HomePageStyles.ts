@@ -14,6 +14,7 @@ export default StyleSheet.create({
     top: 0,
     zIndex: 150,
     overflow: 'hidden',
+    paddingTop: 5,
   },
   body: {
     flex: 1,

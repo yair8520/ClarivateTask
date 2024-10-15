@@ -20,7 +20,7 @@ export const LocationSearch = ({}: LocationSearchProps) => {
       setCoordinates(coordinates)
     );
   };
-  const buttonStatus = !!(city.place_id && country.place_id);
+  const isButtonEnabled = !!(city.place_id && country.place_id);
   return (
     <>
       <AutoComplete
@@ -36,7 +36,11 @@ export const LocationSearch = ({}: LocationSearchProps) => {
         value={city.description}
         inputProps={{ editable: !!country.place_id }}
       />
-      <Button disabled={!buttonStatus} title="Go!" onPress={setSelectedPlace} />
+      <Button
+        disabled={!isButtonEnabled}
+        title="Go!"
+        onPress={setSelectedPlace}
+      />
     </>
   );
 };

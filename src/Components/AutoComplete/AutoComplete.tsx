@@ -18,6 +18,7 @@ export const AutoComplete = ({
   inputProps,
 }: AutoCompleteProps) => {
   const [filteredData, setFilteredData] = useState<TPlace[]>([]);
+  console.log(data)
   const filterData = (text: string) => {
     onChange({ description: text, place_id: '' });
     if (!text) {
@@ -34,7 +35,7 @@ export const AutoComplete = ({
     onChange(item);
     setFilteredData([]);
   };
-
+  const displayDropDown = filteredData.length > 0 && value;
   return (
     <View style={styles.container}>
       <TextInput
@@ -44,7 +45,7 @@ export const AutoComplete = ({
         onChangeText={filterData}
         {...inputProps}
       />
-      {filteredData.length > 0 && value && (
+      {displayDropDown && (
         <View style={styles.dropdown}>
           <FlatList
             data={filteredData}

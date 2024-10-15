@@ -36,7 +36,7 @@ export const HomeProvider = ({ children }: HomeContextProps) => {
       countryCode.current = '';
       try {
         const countries = await getCountriesFromGoogle(country.description);
-        setCountryData(countries);
+        if (countries.length > 0) setCountryData(countries);
       } catch (error) {
         console.error('Error fetching countries:', error);
       }

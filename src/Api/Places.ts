@@ -24,8 +24,12 @@ const fetchFromGoogle = async (url: string) => {
 export const getCountriesFromGoogle = async (
   input: string
 ): Promise<TPlace[]> => {
-  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=(regions)&key=${GOOGLE_PLACES_API}`;
+  if (input.length < 3) {
+    return [];
+  }
+  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=country&key=${GOOGLE_PLACES_API}`;
   const data = await fetchFromGoogle(url);
+  console.log("here",data)
 
   if (data?.predictions.length) {
     return data.predictions.map((prediction: TPlace) => ({
@@ -42,6 +46,9 @@ export const getCitiesForCountry = async (
   countryCode: string,
   input: string
 ): Promise<TPlace[]> => {
+  if (input.length < 3) {
+    return [];
+  }
   const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=(cities)&components=country:${countryCode}&key=${GOOGLE_PLACES_API}`;
   const data = await fetchFromGoogle(url);
 

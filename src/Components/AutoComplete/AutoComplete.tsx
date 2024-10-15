@@ -5,6 +5,7 @@ import {
   FlatList,
   Text,
   TouchableOpacity,
+  Keyboard,
 } from 'react-native';
 import { AutoCompleteProps } from './AutoCompleteProps';
 import styles from './AutoCompleteStyles';
@@ -17,38 +18,36 @@ export const AutoComplete = ({
   value,
   inputProps,
 }: AutoCompleteProps) => {
-  const [filteredData, setFilteredData] = useState<TPlace[]>([]);
-  console.log(data)
-  const filterData = (text: string) => {
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const onChangeText = (text: string) => {
     onChange({ description: text, place_id: '' });
-    if (!text) {
-      setFilteredData(data);
-      return;
-    }
-    const filtered = data.filter((item) =>
-      item.description.toLowerCase().includes(text.toLowerCase())
-    );
-    setFilteredData(filtered.length > 0 ? filtered : data);
+    setDropdownVisible(text.length > 0);
   };
 
   const handleItemSelect = (item: TPlace) => {
+    setDropdownVisible(false);
+    Keyboard.dismiss();
+    if (!item.place_id) return;
     onChange(item);
-    setFilteredData([]);
   };
-  const displayDropDown = filteredData.length > 0 && value;
+
+  const displayDropDown = isDropdownVisible && data.length > 0;
+
   return (
     <View style={styles.container}>
       <TextInput
+        onBlur={() => setDropdownVisible(false)}
         style={styles.textInput}
         placeholder={placeholder}
         value={value}
-        onChangeText={filterData}
+        onChangeText={onChangeText}
         {...inputProps}
       />
       {displayDropDown && (
         <View style={styles.dropdown}>
           <FlatList
-            data={filteredData}
+            keyboardShouldPersistTaps="handled"
+            data={data}
             keyExtractor={(item) => item.place_id}
             renderItem={({ item }) => (
               <TouchableOpacity

@@ -5,22 +5,24 @@ import { HomeContext } from '../../Context';
 import { Alert, Button } from 'react-native';
 import { getPlaceCoordinates } from '../../Api/Places';
 
-export const LocationSearch = ({}: LocationSearchProps) => {
+export const LocationSearch = ({ onNavigate }: LocationSearchProps) => {
   const {
-    country,
     city,
     setCity,
+    country,
     setCountry,
     countryData,
     cityData,
     setCoordinates,
   } = useContext(HomeContext);
+  const isButtonEnabled = !!(city.place_id && country.place_id);
+
   const setSelectedPlace = () => {
     getPlaceCoordinates(city.place_id).then((coordinates) =>
       coordinates ? setCoordinates(coordinates) : Alert.alert('Try Again!')
     );
+    onNavigate();
   };
-  const isButtonEnabled = !!(city.place_id && country.place_id);
   return (
     <>
       <AutoComplete
@@ -38,7 +40,7 @@ export const LocationSearch = ({}: LocationSearchProps) => {
       />
       <Button
         disabled={!isButtonEnabled}
-        title="Go!"
+        title="Navigate"
         onPress={setSelectedPlace}
       />
     </>

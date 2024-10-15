@@ -5,8 +5,7 @@ import MapView, { Marker } from 'react-native-maps';
 import { HomeContext } from '../../Context';
 import { initialRegion, zoom } from '../../Constant';
 
-export const CMap = ({ ...rest }: CMapProps) => {
-  const { coordinates } = useContext(HomeContext);
+export const CMap = ({ coordinates, ...rest }: CMapProps) => {
   const mapRef = useRef<MapView | null>(null);
 
   useEffect(() => {
@@ -20,9 +19,10 @@ export const CMap = ({ ...rest }: CMapProps) => {
       );
     }
   }, [coordinates]);
-  
+
   return (
     <MapView
+    zoomControlEnabled
       ref={mapRef}
       style={styles.container}
       provider="google"

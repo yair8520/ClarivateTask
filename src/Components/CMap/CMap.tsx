@@ -8,6 +8,7 @@ import { initialRegion, zoom } from '../../Constant';
 export const CMap = ({ ...rest }: CMapProps) => {
   const { coordinates } = useContext(HomeContext);
   const mapRef = useRef<MapView | null>(null);
+
   useEffect(() => {
     if (mapRef.current && coordinates) {
       mapRef.current.animateToRegion(
@@ -19,6 +20,7 @@ export const CMap = ({ ...rest }: CMapProps) => {
       );
     }
   }, [coordinates]);
+  
   return (
     <MapView
       ref={mapRef}

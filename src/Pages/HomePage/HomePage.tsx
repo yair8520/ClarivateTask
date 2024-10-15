@@ -3,13 +3,14 @@ import React, { useRef, useState } from 'react';
 import { HomePageProps } from './HomePageProps';
 import styles from './HomePageStyles';
 import { CMap, LocationSearch } from '../../Components';
-
+import { homeHeader } from '../../Constant';
+const { close, open } = homeHeader;
 export const HomePage = ({}: HomePageProps) => {
   const [expanded, setExpanded] = useState(false);
-  const animation = useRef(new Animated.Value(300)).current;
+  const animation = useRef(new Animated.Value(open)).current;
 
   const toggleHeader = () => {
-    const finalHeight = !expanded ? 40 : 300;
+    const finalHeight = !expanded ? close : open;
     Animated.timing(animation, {
       toValue: finalHeight,
       duration: 300,

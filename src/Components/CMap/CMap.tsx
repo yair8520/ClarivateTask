@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CMapProps } from './CMapProps';
 import styles from './CMapStyles';
 import MapView, { Marker } from 'react-native-maps';
-import { HomeContext } from '../../Context';
 import { initialRegion, zoom } from '../../Constant';
 
 export const CMap = ({ coordinates, ...rest }: CMapProps) => {
@@ -22,7 +21,7 @@ export const CMap = ({ coordinates, ...rest }: CMapProps) => {
 
   return (
     <MapView
-    zoomControlEnabled
+      zoomControlEnabled
       ref={mapRef}
       style={styles.container}
       provider="google"

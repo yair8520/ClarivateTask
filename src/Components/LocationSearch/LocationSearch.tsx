@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { LocationSearchProps } from './LocationSearchProps';
 import { AutoComplete } from '../AutoComplete';
 import { HomeContext } from '../../Context';
-import { Button } from 'react-native';
+import { Alert, Button } from 'react-native';
 import { getPlaceCoordinates } from '../../Api/Places';
 
 export const LocationSearch = ({}: LocationSearchProps) => {
@@ -17,7 +17,7 @@ export const LocationSearch = ({}: LocationSearchProps) => {
   } = useContext(HomeContext);
   const setSelectedPlace = () => {
     getPlaceCoordinates(city.place_id).then((coordinates) =>
-      setCoordinates(coordinates)
+      coordinates ? setCoordinates(coordinates) : Alert.alert('Try Again!')
     );
   };
   const isButtonEnabled = !!(city.place_id && country.place_id);
